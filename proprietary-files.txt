@@ -1155,7 +1155,7 @@ vendor/lib64/libmodalityservice_jni.so
 #vendor/lib64/motorola.hardware.audio@2.0_vendor.so
 
 # ModService
--priv-app/ModService/ModService.apk
+-priv-app/ModService/ModService.apk;PRESIGNED
 lib/libmodmanager_system.so
 lib64/libmodmanager_system.so
 vendor/lib/libmodmanager.so
@@ -1166,14 +1166,14 @@ lib/com.motorola.mod@1.0.so
 lib64/com.motorola.mod@1.0.so
 
 # Camera Mod
--app/MotCameraMod/MotCameraMod.apk
+-app/MotCameraMod/MotCameraMod.apk;PRESIGNED
 vendor/bin/mods_camd
 lib/motorola.hardware.mods_camera.provider@2.4.so
 lib64/motorola.hardware.mods_camera.provider@2.4.so
 vendor/etc/init/motorola.hardware.mods_camera.provider@2.4-service.rc
 
 # Projector Mod
--priv-app/ProjectorApp/ProjectorApp.apk
+-priv-app/ProjectorApp/ProjectorApp.apk;PRESIGNED
 etc/permissions/privapp-permissions-com.motorola.projectormod.xml
 
 #Carrier apps
