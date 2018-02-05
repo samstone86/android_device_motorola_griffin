@@ -21,3 +21,11 @@ LOCAL_MODULE := libshim_cam_YuvSkia
 LOCAL_MODULE_TAGS := optional
 LOCAL_SHARED_LIBRARIES := libskia
 include $(BUILD_SHARED_LIBRARY)
+
+# Audio Hal
+include $(CLEAR_VARS)
+LOCAL_C_INCLUDES := external/tinyalsa/include
+LOCAL_SRC_FILES := mixer.c
+LOCAL_MODULE := libshim_mixer
+LOCAL_MODULE_TAGS := optional
+include $(BUILD_SHARED_LIBRARY)

@@ -41,6 +41,18 @@ persist.vendor.bt.enable.splita2dp=false
 persist.vendor.audio.speaker.prot.enable=true
 persist.vendor.audio.spkr.cal.duration=5
 
+persist.radio.custom_ecc=1
+persist.radio.sib16_support=1
+persist.radio.no_wait_for_card=1
+persist.radio.dfr_mode_set=1
+persist.radio.relay_oprt_change=1
+persist.radio.oem_ind_to_both=0
+persist.radio.0x9e_not_callname=1
+persist.radio.mt_sms_ack=30
+persist.radio.force_get_pref=1
+persist.radio.is_wps_enabled=true
+persist.radio.jbims=1
+persist.qcril_uim_vcc_feature=1
 
 audio.offload.disable=false
 audio.playback.mch.downsample=0

@@ -47,7 +47,7 @@ on init
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
-    export LD_SHIM_LIBS /system/lib/libYuvSkia.so|libshim_cam_YuvSkia.so
+    export LD_SHIM_LIBS /system/lib/libYuvSkia.so|libshim_cam_YuvSkia.so:/system/vendor/lib/hw/audio.primary.msm8996.so|libtinycompress_vendor.so:/system/vendor/lib/hw/audio.primary.msm8996.so|libshim_mixer.so
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
