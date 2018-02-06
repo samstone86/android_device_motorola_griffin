@@ -24,8 +24,6 @@
 
 BOARD_VENDOR := motorola-qcom
 PLATFORM_PATH := device/motorola/griffin
-DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 TARGET_FS_CONFIG_GEN += \
     $(PLATFORM_PATH)/fs_config/file_caps.fs \
     $(PLATFORM_PATH)/fs_config/mot_aids.fs
@@ -59,6 +57,10 @@ ENABLE_CPUSETS := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_CRYPTFS_HW_PATH := $(PLATFORM_PATH)/cryptfs_hw
+
+# create some directories and symlinks
+BOARD_ROOT_EXTRA_FOLDERS := bt_firmware firmware persist
 
 # CNE and DPM
 BOARD_USES_QCNE := true
@@ -82,6 +84,7 @@ endif
 TARGET_HAS_NO_WIFI_STATS := true
 
 # Display
+TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
 HAVE_ADRENO_SOURCE:= false
 BOARD_USES_ADRENO := true
 MAX_EGL_CACHE_KEY_SIZE := 12*1024
@@ -102,9 +105,7 @@ TARGET_USES_GRALLOC1 := true
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
-#BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff
-#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=permissive user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff
 BOARD_KERNEL_CMDLINE += cnsscore.pcie_link_down_panic=1
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -125,6 +126,7 @@ TARGET_INIT_VENDOR_LIB := libinit_griffin
 TARGET_RECOVERY_DEVICE_MODULES := libinit_griffin
 
 # Audio
+TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
 #AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
 AUDIO_FEATURE_ENABLED_ACDB_LICENSE := true
 #AUDIO_FEATURE_ENABLED_APE_OFFLOAD := true
@@ -156,21 +158,15 @@ TARGET_USES_QCOM_MM_AUDIO := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
-# Enable dexpreopt to speed boot time
-ifeq ($(HOST_OS),linux)
-    ifneq ($(TARGET_BUILD_VARIANT),eng)
-        ifeq ($(WITH_DEXPREOPT),)
-            WITH_DEXPREOPT := true
-            WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
-        endif
-    endif
-endif
-
 # GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8996
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 TARGET_NO_RPC := true
 USE_DEVICE_SPECIFIC_GPS := true
+
+# HIDL
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
@@ -199,7 +195,7 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
+#BOARD_SEPOLICY_DIRS += $(PLATFORM_PATH)/sepolicy
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(PLATFORM_PATH)/bluetooth
@@ -215,7 +211,6 @@ TARGET_PROVIDES_LIBLIGHT := true
 # Camera
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 USE_DEVICE_SPECIFIC_CAMERA := true
-# TARGET_CAMERA_APP := Camera2
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -227,10 +222,8 @@ TARGET_SYSTEM_PROP += $(PLATFORM_PATH)/system.prop
 # Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
 
-# LINEAGEHW
-BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/lineagehw
-
 # Media
+TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
 TARGET_USES_MEDIA_EXTENSIONS := true
 
 # SDClang
